@@ -1,11 +1,15 @@
-const express = require('express');
-const app = express();
-const port = 5000;
+const app = require('./app');
+const connectDB = require('./config/db');
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
+await connectDB();
+
+const startServer = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  });
+};
+
+startServer();
