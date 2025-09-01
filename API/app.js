@@ -1,16 +1,16 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const morgan = require('morgan');
+import express, { json } from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import morgan from 'morgan';
 
 const app = express();
 
-const errorMiddleware = require('./middlewares/error.middleware');
+import errorMiddleware from './middlewares/error.middleware.js';
 
 app.use(cors());
-app.use(express.json()); 
+app.use(json()); 
 app.use(morgan('dev'));
 
 app.use(errorMiddleware);
 
-module.exports = app;
+export default app;

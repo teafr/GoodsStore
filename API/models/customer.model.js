@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const customerSchema = new mongoose.Schema({
+const customerSchema = new Schema({
     lastName: { type: String, required: true },
     firstName: { type: String, required: true },
     patronymic: { type: String },
@@ -10,4 +10,4 @@ const customerSchema = new mongoose.Schema({
     isLoyal: { type: Boolean, default: false }
 });
 
-module.exports = mongoose.model('Customer', customerSchema);
+export default model('Customer', customerSchema);
