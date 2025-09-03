@@ -6,12 +6,21 @@ const productSchema = new Schema({
     unit: { type: String, required: true, trim: true }
 }, {
     statics: {
-        getFiltered: function(query = {}) {
+        getFiltered: function (query = {}) {
             const filter = {};
-            Object.keys(query).forEach(key => {
-                if (query[key] !== undefined) filter[key] = query[key];
-            });
-            return this.find(filter).lean();
+            if (query.name) filter.name = { $regex: query.name, $options: 'i' };
+            if (query.minPrice) filter.price = { ...filter.price, $gte: query.minPrice };
+            if (query.maxPrice) filter.price = { ...filter.price, $lte: query.maxPrice };
+            if (query.unit) filter.unit = query.unit;
+
+            let result = this.find(filter);
+            if (query.sortBy) result = result.sort(query.sortBy);
+            if (query.pageSize) result = result.limit(parseInt(query.pageSize, 10));
+            if (query.currentPage && query.pageSize) {
+                result = result.skip((parseInt(query.currentPage, 10) - 1) * parseInt(query.pageSize, 10));
+            }
+
+            return result.lean();
         },
         getById: function(id) {
             return this.findOne({ _id: id }).lean();
