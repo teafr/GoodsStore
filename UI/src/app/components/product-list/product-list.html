@@ -1,0 +1,17 @@
+<div class="grid">
+    @for (product of products; track $index) {
+        <div class="card">
+            <h3>{{ product.name }}</h3>
+            <p>Unit: {{ product.unit }}</p>
+            <p>Price: {{ product.price }}</p>
+            <button routerLink="/products/{{product.id}}">More info</button>
+        </div>
+    }
+</div>
+
+<!-- <mat-paginator>
+  <mat-paginator [length]="filter.pagination.totalItems"
+                 [pageSize]="filter.pagination.pageSize"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</mat-paginator> -->

@@ -1,0 +1,11 @@
+@if(product) {
+  <div class="product-details">
+    <h2>{{ product.name }}</h2>
+    <p><strong>ID:</strong> {{ product.id }}</p>
+    <p><strong>Price:</strong> {{ product.price }}</p>
+    <p><strong>Unit:</strong> {{ product.unit }}</p>
+  </div>
+}
+@else {
+  <p>Loading product details...</p>
+}

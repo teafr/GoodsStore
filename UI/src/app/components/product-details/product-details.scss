@@ -1,0 +1,21 @@
+:host {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 8px;
+    background-color: var(--gray-50);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-details h2 {
+    margin-top: 0;
+    color: var(--gray-900);
+}
+
+.product-details p {
+    margin: 0.5rem 0;
+    color: var(--gray-700);
+}
