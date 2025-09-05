@@ -3,7 +3,7 @@ import AppError from '../utils/AppError.js';
 
 export async function getFilteredProducts(req, res, next) {
     try {
-        const products = await Product.getFiltered(req.query).lean();
+        const products = await Product.getFiltered(req.query);
         res.json(products);
     } catch (error) {
         next(error);

@@ -5,6 +5,22 @@ const productSchema = new Schema({
     price: { type: Number, required: true, min: 0 },
     unit: { type: String, required: true, trim: true }
 }, {
+    toJSON: {
+        virtual: true,
+        versionKey: false,
+        transform: (_, ret) => {
+            ret.id = ret._id;
+            delete ret._id;
+        }
+    },
+    toObject: {
+        virtual: true,
+        versionKey: false,
+        transform: (_, ret) => {
+            ret.id = ret._id;
+            delete ret._id;
+        }
+    },
     statics: {
         getFiltered: function (query = {}) {
             const filter = {};
@@ -20,13 +36,13 @@ const productSchema = new Schema({
                 result = result.skip((parseInt(query.currentPage, 10) - 1) * parseInt(query.pageSize, 10));
             }
 
-            return result.lean();
+            return result;
         },
         getById: function(id) {
-            return this.findOne({ _id: id }).lean();
+            return this.findOne({ _id: id });
         },
         updateById: function(id, update, options) {
-            return this.findOneAndUpdate({ _id: id }, update, options).lean();
+            return this.findOneAndUpdate({ _id: id }, update, options);
         },
         deleteById: function(id) {
             return this.findOneAndDelete({ _id: id });
