@@ -19,5 +19,20 @@ export const routes: Routes = [
 
         path: 'products/:id',
         component: ProductDetails
+    }, {
+        path: 'cart',
+        component: Cart
+    }, {
+        path: 'checkout',
+        component: Checkout
+    }, {
+        path: 'profile',
+        component: Profile
+    }, {
+        path: 'login',
+        component: Login
+    }, {
+        path: 'register',
+        component: Register
     }
 ];

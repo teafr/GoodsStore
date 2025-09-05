@@ -1,0 +1,89 @@
+header {
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    padding: 0.75rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &-brand a {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #2c3e50;
+    
+            &:hover {
+                color: #007bff;
+            }
+        }
+
+        &-search {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+
+            input {
+                width: 60%;
+                max-width: 500px;
+                padding: 0.5rem 1rem;
+                border: 1px solid #ccc;
+                border-radius: 25px;
+                outline: none;
+
+                &:focus {
+                    border-color: #007bff;
+                }
+            }
+        }
+
+        &-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .cart-btn {
+                background: transparent;
+                border: none;
+                font-size: 1rem;
+                cursor: pointer;
+
+                &:hover {
+                    color: #007bff;
+                }
+            }
+
+            .profile {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                .avatar {
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    background: #eaeaea;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    color: #555;
+                }
+
+                a {
+                    text-decoration: none;
+                    margin-left: 0.5rem;
+                    color: #007bff;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

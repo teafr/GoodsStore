@@ -1,0 +1,25 @@
+<header>
+  <div class="navbar">
+    <div class="navbar-brand"> <a href="/">GoodsStore</a> </div>
+    <div class="navbar-search">
+      <input type="text" placeholder="Search products..." (keyup.enter)="onSearch()" />
+    </div>
+
+    <div class="navbar-actions">
+      <a routerLink="/cart" class="cart-btn">
+        🛒 Cart
+      </a>
+      <div class="profile">
+        <ng-container>
+            @if (isAuthenticated) {
+                <span class="username">{{ userName }}</span>
+            }
+            @else {
+                <a routerLink="/register">Register</a>
+                <a routerLink="/login">Login</a>
+            }
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</header>
