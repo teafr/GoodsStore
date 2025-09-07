@@ -35,7 +35,7 @@ export async function getCustomerSales(req, res, next) {
     }
 }
 
-export async function createCustomer(req, res) {
+export async function createCustomer(req, res, next) {
     try {
         const newCustomer = await Customer.create(req.body);
         res.status(201).json(newCustomer);
@@ -44,7 +44,7 @@ export async function createCustomer(req, res) {
     }
 }
 
-export async function updateCustomerById(req, res) {
+export async function updateCustomerById(req, res, next) {
     try {
         const updatedCustomer = await Customer.updateById(req.params.id, req.body, { new: true });
         if (!updatedCustomer) {
@@ -56,7 +56,7 @@ export async function updateCustomerById(req, res) {
     }
 }
 
-export async function deleteCustomerById(req, res) {
+export async function deleteCustomerById(req, res, next) {
     try {
         const deleted = await Customer.deleteById(req.params.id);
         if (!deleted) {
