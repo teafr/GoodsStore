@@ -7,6 +7,7 @@ const saleSchema = new Schema({
     deliveryDate: { type: Date },
     quantity: { type: Number, required: true, min: 1 }
 }, {
+    versionKey: false,
     statics: {
         get: function () {
             return this.find().populate('product').populate('customer').lean();

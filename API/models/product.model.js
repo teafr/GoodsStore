@@ -31,10 +31,6 @@ const productSchema = new Schema({
 
             let result = this.find(filter);
             if (query.sortBy) result = result.sort(query.sortBy);
-            if (query.pageSize) result = result.limit(parseInt(query.pageSize, 10));
-            if (query.currentPage && query.pageSize) {
-                result = result.skip((parseInt(query.currentPage, 10) - 1) * parseInt(query.pageSize, 10));
-            }
 
             return result;
         },
