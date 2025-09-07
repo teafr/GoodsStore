@@ -11,12 +11,12 @@
       </a>
       <div class="profile">
         <ng-container>
-            @if (isAuthenticated) {
-                <span class="username">{{ userName }}</span>
+            @if (authService.isAuthenticated()) {
+              <a class="username" (click)="logout()">Logout</a>
             }
             @else {
-                <a routerLink="/register">Register</a>
-                <a routerLink="/login">Login</a>
+              <a routerLink="/register">Register</a>
+              <a routerLink="/login">Login</a>
             }
         </ng-container>
       </div>

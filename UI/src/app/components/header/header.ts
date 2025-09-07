@@ -1,20 +1,26 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './header.html',
   styleUrls: ['./header.scss']
 })
 export class Header {
-  searchTerm = '';
-  isAuthenticated = false; 
-  userName = 'John Doe';
-  userInitials = 'JD';
+  searchTerm: string = '';
+
+  constructor(public authService: AuthService, private router: Router) { }
 
   onSearch() {
-    console.log('Searching for:', this.searchTerm);
-    // TODO: trigger product search
+    this.router.navigate(['/products'], { queryParams: { name: this.searchTerm } });
+  }
+
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 }
