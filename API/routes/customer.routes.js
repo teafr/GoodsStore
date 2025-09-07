@@ -3,11 +3,8 @@ import { getCustomers, getCustomerById, createCustomer, getCustomerSales, update
 
 const router = express.Router();
 
-router.get('/', getCustomers);
-router.get('/:id', getCustomerById);
-router.get('/:id/sales', getCustomerSales);
-router.post('/', createCustomer);
-router.put('/:id', updateCustomerById);
-router.delete('/:id', deleteCustomerById);
+router.route('/').get(getCustomers).post(createCustomer);
+router.route('/:id').get(getCustomerById).put(updateCustomerById).delete(deleteCustomerById);
+router.route('/:id/sales').get(getCustomerSales);
 
 export default router;

@@ -3,10 +3,7 @@ import { getSales, getSaleById, createSale, updateSale, deleteSale } from '../co
 
 const router = Router();
 
-router.get('/', getSales);
-router.get('/:id', getSaleById);
-router.post('/', createSale);
-router.put('/:id', updateSale);
-router.delete('/:id', deleteSale);
+router.route('/').get(getSales).post(createSale);
+router.route('/:id').get(getSaleById).put(updateSale).delete(deleteSale);
 
 export default router;
