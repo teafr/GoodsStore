@@ -1,10 +1,8 @@
+import { User } from "./user.model";
+
 export interface Customer {
-    id: number;
-    lastName: string;
-    firstName: string;
-    patronymic?: string;
+    user: User;
     address?: string;
     phone?: string;
-    email: string;
     isLoyal: boolean;
 }
