@@ -2,6 +2,15 @@ import User from '../models/user.model.js';
 import AppError from '../utils/AppError.js';
 import bcrypt from 'bcrypt';
 
+export async function getUser(req, res, next) {
+    try {
+        const foundUser = await User.get(req.user.email);
+        res.status(200).json(foundUser);
+    } catch (error) {
+        next(new AppError(`User wasn't found. Message: ${error.message}`, 401));
+    }
+}
+
 export async function register(req, res, next) {
     try {
         const { firstName, lastName, patronymic, email, phone, address, password } = req.body;
@@ -9,7 +18,7 @@ export async function register(req, res, next) {
         const user = await User.register({ lastName, firstName, patronymic, email, phone, address, hashPassword });
         const tokens = User.generateTokens(user.email);
         
-        res.status(201).json({ tokens });
+        res.status(201).json(tokens);
     } catch (error) {
         next(new AppError(`Registration failed. Message: ${error.message}`, 400));
     }
@@ -25,18 +34,9 @@ export async function login(req, res, next) {
         }
 
         const tokens = User.generateTokens(foundUser.email);
-        res.status(200).json({ tokens });
+        res.status(200).json(tokens);
     } catch (error) {
         next(new AppError(`Login failed. Message: ${error.message}`, 401));
-    }
-}
-
-export async function getUser(req, res, next) {
-    try {
-        const foundUser = await User.get(req.user.email);
-        res.status(200).json({ foundUser });
-    } catch (error) {
-        next(new AppError(`User wasn't found. Message: ${error.message}`, 401));
     }
 }
 
