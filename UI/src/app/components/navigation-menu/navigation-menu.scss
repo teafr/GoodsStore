@@ -1,6 +1,6 @@
 .nav-menu {
     width: 200px;
-    min-height: 100vh;
+    min-height: 80vh;
     background: #f8f9fa;
     padding: 1rem;
     box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
@@ -27,7 +27,7 @@
                 }
 
                 &.active {
-                    background: #007bff;
+                    background: var(--primary);
                     color: #fff;
                 }
             }

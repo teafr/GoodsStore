@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navigation-menu',
@@ -7,4 +8,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './navigation-menu.html',
   styleUrl: './navigation-menu.scss'
 })
-export class NavigationMenu {}
+export class NavigationMenu {
+  constructor(public authService: AuthService) { }
+}

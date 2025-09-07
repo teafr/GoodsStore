@@ -2,6 +2,7 @@ import { Component, computed } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cart.model';
 import { CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ export class Cart {
   items: CartItem[] = [];
   total = 0;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private router: Router) {
     this.items = this.cartService.cartItemsSig();
     this.total = this.items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
   }
@@ -36,7 +37,6 @@ export class Cart {
   }
 
   checkout() {
-    alert('Proceeding to checkout...');
-    // later: redirect to checkout page
+    this.router.navigateByUrl('/checkout')
   }
 }
