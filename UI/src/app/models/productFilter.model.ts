@@ -1,7 +1,9 @@
 export interface ProductFilter {
+  name?: string;
   minPrice?: number;
   maxPrice?: number;
   unit?: string;
+  sortBy?: string;
   pagination: PaginationInfo;
 }
 

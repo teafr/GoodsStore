@@ -1,11 +1,17 @@
-@if(product) {
-  <div class="product-details">
-    <h2>{{ product.name }}</h2>
-    <p><strong>ID:</strong> {{ product.id }}</p>
-    <p><strong>Price:</strong> {{ product.price }}</p>
-    <p><strong>Unit:</strong> {{ product.unit }}</p>
+@if (product) {
+  <div class="product-card">
+    <img [src]="product.imageUrl" [alt]="product.name" class="product-img" />
+
+    <div class="product-info">
+      <h2 class="product-name">{{ product.name }}</h2>
+      <p class="product-price">{{ product.price | currency }}</p>
+      <p class="product-unit">Unit: {{ product.unit }}</p>
+    </div>
+    
+    <div class="actions">
+      <button (click)="cartService.addToCart(product)" class="cart-btn">Add to Cart</button>
+    </div>
   </div>
-}
-@else {
-  <p>Loading product details...</p>
+} @else {
+  <p class="loading">Loading product details...</p>
 }
