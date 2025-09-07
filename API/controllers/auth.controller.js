@@ -4,12 +4,12 @@ import bcrypt from 'bcrypt';
 
 export async function register(req, res, next) {
     try {
-        const { firstName, lastName, patronymic, email, password } = req.body;
+        const { firstName, lastName, patronymic, email, phone, address, password } = req.body;
         const hashPassword = await bcrypt.hash(password, 12);
-        const user = await User.register({ lastName, firstName, patronymic, email, hashPassword });
+        const user = await User.register({ lastName, firstName, patronymic, email, phone, address, hashPassword });
         const tokens = User.generateTokens(user.email);
         
-        res.status(201).json({ ...user._doc, ...tokens });
+        res.status(201).json({ tokens });
     } catch (error) {
         next(new AppError(`Registration failed. Message: ${error.message}`, 400));
     }
@@ -18,16 +18,25 @@ export async function register(req, res, next) {
 export async function login(req, res, next) {
     try {
         const { email, password } = req.body;
-        const foundUser = await User.login(email);
+        const foundUser = await User.get(email);
 
         if (!foundUser || !(await bcrypt.compare(password, foundUser.hashPassword))) {
             return next(new AppError('Invalid email or password', 401));
         }
 
         const tokens = User.generateTokens(foundUser.email);
-        res.status(200).json({ ...foundUser, ...tokens });
+        res.status(200).json({ tokens });
     } catch (error) {
-        next(new AppError(`Login failed. Message: ${error.message}`, 400));
+        next(new AppError(`Login failed. Message: ${error.message}`, 401));
+    }
+}
+
+export async function getUser(req, res, next) {
+    try {
+        const foundUser = await User.get(req.user.email);
+        res.status(200).json({ foundUser });
+    } catch (error) {
+        next(new AppError(`User wasn't found. Message: ${error.message}`, 401));
     }
 }
 

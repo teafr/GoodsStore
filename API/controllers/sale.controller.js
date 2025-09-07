@@ -31,6 +31,15 @@ export async function createSale(req, res, next) {
     }
 }
 
+export async function createMultipleSales(req, res, next) {
+    try {
+        const sale = await Sale.createMany(req.body);
+        res.status(201).json(sale);
+    } catch (error) {
+        next(new AppError(`Sale wasn't created. Message: ${error.message}`, 400));
+    }
+}
+
 export async function updateSale(req, res, next) {
     try {
         const updatedSale = await Sale.updateById(req.params.id, req.body, { new: true, lean: true });

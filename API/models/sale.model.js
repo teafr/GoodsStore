@@ -2,15 +2,15 @@ import { Schema, model } from 'mongoose';
 
 const saleSchema = new Schema({
     product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
-    customer: { type: Schema.Types.ObjectId, ref: 'Customer', required: true },
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     purchaseDate: { type: Date, required: true },
     deliveryDate: { type: Date },
     quantity: { type: Number, required: true, min: 1 }
-}, {
+}, { 
     versionKey: false,
     statics: {
         get: function () {
-            return this.find().populate('product').populate('customer').lean();
+            return this.find().populate('product').lean();
         },
         getById: function (id) {
             return this.findOne({ _id: id }).lean();
@@ -18,6 +18,9 @@ const saleSchema = new Schema({
         createSale: function (saleData) {
             const sale = new this(saleData);
             return sale.save();
+        },
+        createMany: function (sales) {
+            return this.insertMany(sales);
         },
         updateById: function (id, update, options) {
             return this.findOneAndUpdate({ _id: id }, update, options);

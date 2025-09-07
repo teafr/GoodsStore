@@ -3,7 +3,6 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import productRoutes from './routes/product.routes.js';
-import customerRoutes from './routes/customer.routes.js';
 import saleRoutes from './routes/sale.routes.js';
 import authRoutes from './routes/auth.routes.js';
 
@@ -21,7 +20,6 @@ app.use('/products', productRoutes);
 
 app.use(authMiddleware);
 
-app.use('/customers', customerRoutes);
 app.use('/sales', saleRoutes);
 
 
