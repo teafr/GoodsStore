@@ -25,11 +25,7 @@ export class Profile implements OnInit {
     });
   }
 
-  goToCart() {
-    this.router.navigateByUrl('/cart');
-  }
-
-  checkout() {
-    this.router.navigateByUrl('/checkout');
+  edit() {
+    this.router.navigateByUrl('/edit-profile');
   }
 }

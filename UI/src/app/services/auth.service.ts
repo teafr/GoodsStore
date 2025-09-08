@@ -24,6 +24,15 @@ export class AuthService {
         );
     }
 
+    updateUser(user: User) {
+        return this.http.put(this.baseUrl, user);
+    }
+
+    markUserAsLoyal(id: string) {
+        console.log(`Id: ${id}`);
+        return this.http.put(`${this.baseUrl}/mark/${id}`, {}).subscribe();
+    }
+
     login(email: string, password: string) {
         return this.http.post<string>(`${this.baseUrl}/login`, { email, password }, { withCredentials: true }).pipe(
             tap(token => {

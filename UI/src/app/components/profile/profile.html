@@ -6,6 +6,11 @@
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Phone:</strong> {{ user.phone }}</p>
         <p><strong>Address:</strong> {{ user.address }}</p>
+        <p><strong>Status:</strong> {{ user.isLoyal ? "loyal" : "not loyal" }}</p>
+      </div>
+    
+      <div class="actions">
+        <button class="checkout" (click)="edit()">Edit</button>
       </div>
     
       <div class="sales-history">
@@ -24,19 +29,14 @@
             @for (sale of salesHistory; track $index) {
                 <tr>
                   <td>{{ sale.product.name }}</td>
-                  <td>{{( sale.product.price * sale.quantity) | currency }}</td>
+                  <td>{{( sale.product.price * sale.quantity * (1 - sale.discount)) | currency }}</td>
                   <td>{{ sale.quantity }}</td>
                   <td>{{ sale.purchaseDate | date: 'mediumDate' }}</td>
-                  <td>{{ sale.deliveryDate | date: 'mediumDate' }}</td>
+                  <td>{{ sale.deliveryDate ? (sale.deliveryDate | date: 'mediumDate') : "Hasn't delivered yet" }}</td>
                 </tr>
             }
           </tbody>
         </table>
-      </div>
-    
-      <div class="actions">
-        <button (click)="goToCart()">Go to Cart</button>
-        <button class="checkout" (click)="checkout()">Checkout</button>
       </div>
     </div>
 }

@@ -32,7 +32,7 @@ export class CartService {
     this.save();
   }
 
-  removeFromCart(productId: number) {
+  removeFromCart(productId: string) {
     const items = this.cartItemsSig().filter(i => i.product.id !== productId);
     this.cartItemsSig.set(items);
     this.save();
@@ -42,15 +42,6 @@ export class CartService {
     this.cartItemsSig.set([]);
     localStorage.removeItem(this.cartKey);
   }
-
-  // getCartItems() {
-  //   const saved = localStorage.getItem(this.cartKey);
-  //   if (saved) {
-  //     return JSON.parse(saved);
-  //   }
-
-  //   return null;
-  // }
 
   getTotalPrice() {
     return this.cartItemsSig().reduce((sum, i) => sum + i.product.price * i.quantity, 0);

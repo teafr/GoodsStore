@@ -9,7 +9,7 @@ export class SaleService {
 
     constructor(private http: HttpClient) { }
     
-    getUserSales(userId: number) {
+    getUserSales(userId: string) {
         return this.http.get<Sale[]>(`${this.baseUrl}/user/${userId}`);
     }
     

@@ -17,10 +17,10 @@ export const authInterceptor : HttpInterceptorFn = (request, next) => {
 
   let req = request;
   if (token && !isAuthLogin && !isAuthRegister && !isAuthRefresh) {
-    req = request.clone({
-      setHeaders: { Authorization: `Bearer ${token}` },
-    });
-  }
+    console.log("Making request!!!!")
+    req = request.clone({ setHeaders: { Authorization: `Bearer ${token}` }, withCredentials: true, });
+  } 
+
     
   return next(req).pipe(catchError((error: HttpErrorResponse) => {
     if (isAuthRefresh || isAuthLogin || isAuthRegister) {
@@ -39,10 +39,7 @@ export const authInterceptor : HttpInterceptorFn = (request, next) => {
         switchMap((newToken) => {
           refreshedToken$.next(newToken);
 
-          const retry = req.clone({
-            setHeaders: { Authorization: `Bearer ${newToken}` },
-          });
-          return next(retry);
+          return next(req.clone({ setHeaders: { Authorization: `Bearer ${newToken}` }, withCredentials: true, }));
         }),
         catchError((refreshErr) => {
           authService.logout();
@@ -56,10 +53,10 @@ export const authInterceptor : HttpInterceptorFn = (request, next) => {
     
     return refreshedToken$.pipe(
       take(1),
-      filter((t) => !!t),
+      filter((token) => !!token),
       switchMap((t) => {
         return next(req.clone({
-          setHeaders: { Authorization: `Bearer ${t}` },
+          setHeaders: { Authorization: `Bearer ${t}` }, withCredentials: true,
         }));
       })
     );

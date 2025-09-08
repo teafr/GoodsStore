@@ -7,6 +7,7 @@ import { Profile } from './components/profile/profile';
 import { Login } from './components/login/login';
 import { Register } from './components/register/register';
 import { ThankYou } from './components/thank-you/thank-you';
+import { EditProfile } from './components/edit-profile/edit-profile';
 
 export const routes: Routes = [
     {
@@ -38,5 +39,8 @@ export const routes: Routes = [
     }, {
         path: 'thank-you',
         component: ThankYou
+    }, {
+        path: 'edit-profile',
+        component: EditProfile
     }
 ];

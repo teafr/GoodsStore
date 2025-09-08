@@ -2,8 +2,9 @@ import { Product } from "./product.model";
 
 export interface Sale {
     product: Product;
-    user: number;
+    user: string;
     quantity: number;
     deliveryDate?: Date;
     purchaseDate: Date;
+    discount: number;
 }

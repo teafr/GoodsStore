@@ -32,7 +32,7 @@ export class Cart {
     }
   }
 
-  remove(productId: number) {
+  remove(productId: string) {
     this.cartService.removeFromCart(productId);
   }
 

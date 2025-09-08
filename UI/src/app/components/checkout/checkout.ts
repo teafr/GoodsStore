@@ -7,6 +7,7 @@ import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { CartItem } from '../../models/cart.model';
 import { Sale } from '../../models/sale.model';
+import { environment } from '../../../environment/environment';
 
 @Component({
   selector: 'app-checkout',
@@ -17,6 +18,7 @@ import { Sale } from '../../models/sale.model';
 export class Checkout {
   cartItems: CartItem[];
   totalPrice: number;
+  discount: number = 0;
 
   constructor(
     private saleService: SaleService,
@@ -28,9 +30,12 @@ export class Checkout {
     this.totalPrice = this.cartService.getTotalPrice();
   }
 
+  ngOnInit() {
+    this.authService.getUser().subscribe(currentUser => this.discount = currentUser.isLoyal ? environment.loyalCustomersDiscount : 0);
+  }
+
   makePurchase() {
     this.authService.getUser().subscribe(currentUser => {
-      console.log(`Current user: ${JSON.stringify(currentUser)}`);
       if (!currentUser) {
         this.router.navigateByUrl('/login');
         return;
@@ -41,8 +46,14 @@ export class Checkout {
         user: currentUser.id,
         quantity: cartItem.quantity,
         purchaseDate: new Date(),
+        discount: this.discount
       }));
+
       this.saleService.createMultipleSales(sales).subscribe(items => {
+        if (!currentUser.isLoyal && this.totalPrice > 5000) {
+          this.authService.markUserAsLoyal(currentUser.id);
+        }
+
         this.cartService.clearCart();
         this.router.navigateByUrl('/thank-you');
       });
