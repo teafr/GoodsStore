@@ -1,22 +1,22 @@
 import { Injectable, signal } from '@angular/core';
 import { CartItem } from '../models/cart.model';
 import { Product } from '../models/product.model';
+import { environment } from '../../environment/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class CartService {
   cartItemsSig = signal<CartItem[]>([]);
+  cartKey = environment.cartKey;
 
   constructor() {
-    const saved = localStorage.getItem('cart');
+    const saved = localStorage.getItem(this.cartKey);
     if (saved) {
       this.cartItemsSig.set(JSON.parse(saved));
     }
   }
 
   private save() {
-    localStorage.setItem('cart', JSON.stringify(this.cartItemsSig()));
+    localStorage.setItem(this.cartKey, JSON.stringify(this.cartItemsSig()));
   }
 
   addToCart(product: Product) {
@@ -40,6 +40,19 @@ export class CartService {
 
   clearCart() {
     this.cartItemsSig.set([]);
-    localStorage.removeItem('cart');
+    localStorage.removeItem(this.cartKey);
+  }
+
+  // getCartItems() {
+  //   const saved = localStorage.getItem(this.cartKey);
+  //   if (saved) {
+  //     return JSON.parse(saved);
+  //   }
+
+  //   return null;
+  // }
+
+  getTotalPrice() {
+    return this.cartItemsSig().reduce((sum, i) => sum + i.product.price * i.quantity, 0);
   }
 }

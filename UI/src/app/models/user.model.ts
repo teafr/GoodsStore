@@ -4,4 +4,7 @@ export interface User {
     firstName: string;
     patronymic?: string;
     email: string;
+    address: string,
+    phone: string,
+    isLoyal: boolean,
 }

@@ -1,10 +1,9 @@
-import { Customer } from "./customer.model";
 import { Product } from "./product.model";
 
 export interface Sale {
-    id: number;
     product: Product;
-    customerId: Customer;
+    user: number;
     quantity: number;
-    date: Date;
+    deliveryDate?: Date;
+    purchaseDate: Date;
 }
