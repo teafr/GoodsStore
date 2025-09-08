@@ -19,6 +19,8 @@ export class ProductList {
   products: Product[] | undefined;
   minPrice = 4;
   filter: ProductFilter = {
+    sortBy: '',
+    unit: '',
     pagination: {
       currentPage: 1,
       pageSize: this.pageSizeOptions[0],
@@ -43,7 +45,7 @@ export class ProductList {
     if (this.filter.minPrice) query += `&minPrice=${this.filter.minPrice}`;
     if (this.filter.maxPrice) query += `&maxPrice=${this.filter.maxPrice}`;
     if (this.filter.unit) query += `&unit=${this.filter.unit}`;
-    if (this.filter.sortBy) query += `&sort=${this.filter.sortBy}`;
+    if (this.filter.sortBy) query += `&sortBy=${this.filter.sortBy}`;
 
     this.productService.getProducts(query).subscribe(items => {
       const start = ((this.filter.pagination.currentPage - 1) * this.filter.pagination.pageSize);
@@ -60,7 +62,7 @@ export class ProductList {
   }
 
   resetFilters() {
-    this.filter = { pagination: { currentPage: 1, pageSize: 10, totalItems: 0 } };
+    this.filter = { sortBy: "", unit: "", pagination: { currentPage: 1, pageSize: 10, totalItems: 0 } };
     this.loadProducts();
   }
 
