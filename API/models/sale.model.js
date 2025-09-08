@@ -12,6 +12,9 @@ const saleSchema = new Schema({
         get: function () {
             return this.find().populate('product').lean();
         },
+        getByUserId: function (userId) {
+            return this.find({ user: userId }).populate('product').lean();
+        },
         getById: function (id) {
             return this.findOne({ _id: id }).lean();
         },

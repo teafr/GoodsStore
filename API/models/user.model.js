@@ -40,7 +40,7 @@ const userSchema = new Schema({
             return user.save();
         },
         generateTokens: function (email) {
-            const accessToken = jwt.sign({ email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '50m' });
+            const accessToken = jwt.sign({ email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
             const refreshToken = jwt.sign({ email }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
             return { accessToken, refreshToken };
         },

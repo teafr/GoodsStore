@@ -1,6 +1,15 @@
 import Sale from '../models/sale.model.js';
 import AppError from '../utils/AppError.js';
 
+export async function getSalesByUserId(req, res, next) {
+    try {
+        const sales = await Sale.getByUserId(req.params.id);
+        res.status(200).json(sales);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export async function getSales(req, res, next) {
     try {
         const sales = await Sale.get();
