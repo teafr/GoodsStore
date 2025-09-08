@@ -5,7 +5,8 @@ const saleSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     purchaseDate: { type: Date, required: true },
     deliveryDate: { type: Date },
-    quantity: { type: Number, required: true, min: 1 }
+    quantity: { type: Number, required: true, min: 1 },
+    discount: { type: Number, default: 0, min: 0, max: 1}
 }, { 
     versionKey: false,
     statics: {
