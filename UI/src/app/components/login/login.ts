@@ -24,7 +24,6 @@ export class Login {
       console.log('Form Data:', formData);
       this.authService.login(formData.username, formData.password).subscribe(user => {        
         if (user) {
-          console.log('Login successful:', user);
           this.router.navigateByUrl('/products');
         }
       });
