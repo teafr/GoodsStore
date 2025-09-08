@@ -4,7 +4,6 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
 import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
 import YAML from 'yamljs';
 
 import productRoutes from './routes/product.routes.js';
