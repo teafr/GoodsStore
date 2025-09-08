@@ -1,5 +1,6 @@
 import express, { json } from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
 import productRoutes from './routes/product.routes.js';
@@ -11,7 +12,11 @@ import authMiddleware from './middlewares/auth.middleware.js';
 
 const app = express();
 
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+  origin: "http://localhost:4200",
+  credentials: true
+}));
 app.use(json()); 
 app.use(morgan('dev'));
 
