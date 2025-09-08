@@ -12,6 +12,32 @@ export async function getUser(req, res, next) {
     }
 }
 
+export async function updateUser(req, res, next) {
+    try {
+        const foundUser = await User.update(req.body, { new: true, lean: true });
+        if (!foundUser) {
+            return next(new AppError('User not found', 404));
+        }
+
+        res.status(200).json(foundUser);
+    } catch (error) {
+        next(new AppError(`User wasn't updated. Message: ${error.message}`, 400));
+    }
+}
+
+export async function markUser(req, res, next) {
+    try {
+        const foundUser = await User.markAsLoyal(req.params.id, { new: true, lean: true });
+        if (!foundUser) {
+            return next(new AppError('User not found', 404));
+        }
+
+        res.status(200).json(foundUser);
+    } catch (error) {
+        next(new AppError(`User wasn't updated. Message: ${error.message}`, 400));
+    }
+}
+
 export async function register(req, res, next) {
     try {
         const { firstName, lastName, patronymic, email, phone, address, password } = req.body;
