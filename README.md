@@ -1,6 +1,6 @@
 # GoodsStore-Backend
 
-Backend for the GoodsStore e‑commerce (Express + Mongoose + JWT auth).
+Backend for the [Goods Store Frontend](https://github.com/teafr/GoodsShop-Frontend) e‑commerce (Express + Mongoose + JWT auth).
 
 ## Table of Contents
 
