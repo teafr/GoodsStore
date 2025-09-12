@@ -9,7 +9,6 @@ Backend for the GoodsStore e‑commerce (Express + Mongoose + JWT auth).
 * [Prerequisites](#prerequisites)
 * [Quick start](#quick-start)
 * [Environment variables (.env)](#environment-variables-env)
-* [Recommended `package.json` scripts](#recommended-packagejson-scripts)
 * [Run the app](#run-the-app)
 * [API documentation (Swagger / OpenAPI)](#api-documentation-swagger--openapi)
 * [Database seeding](#database-seeding)
